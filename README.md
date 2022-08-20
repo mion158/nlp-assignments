@@ -1,2 +1,2 @@
 # Language Chatbot
- Codecademy Practices
+ excercises from Codecademy 
