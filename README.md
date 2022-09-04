@@ -8,3 +8,4 @@ the english language and chatbot - excercises from Codecademy
 5. Word embeddings, words represented by vector - calculate distance between words
 6. Retrieval-based chatbot, used in closed-dommain scenarios using above metrics
 7. Pipelines, I was learning something not nlp-related but made it related sommehow
+8. Generating texts, seq2seq model
