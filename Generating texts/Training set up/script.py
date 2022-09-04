@@ -18,8 +18,7 @@ input_features_dict = dict([(token, i) for i, token in enumerate(input_tokens)])
 target_features_dict = dict([(token, i) for i, token in enumerate(target_tokens)])
 
 
-# Reverse-lookup token index to decode sequences back to
-# something readable.
+# Reverse-lookup token index to decode sequences back to something readable.
 reverse_input_features_dict = dict((i, token) for token, i in input_features_dict.items())
 # Build out reverse_target_features_dict:
 reverse_target_features_dict = dict((i,token) for token, i in target_features_dict.items())
@@ -64,13 +63,10 @@ encoder_states = [state_hidden, state_cell]
 # The decoder input and LSTM layers:
 decoder_inputs = Input(shape=(None, num_decoder_tokens))
 decoder_lstm = LSTM(256, return_sequences=True, return_state=True)
-
 # Retrieve the LSTM outputs and states:
 decoder_outputs, decoder_state_hidden, decoder_state_cell = decoder_lstm(decoder_inputs, initial_state=encoder_states)
-
 # Build a final Dense layer - a final activation layer, using the Softmax function, that will give us the probability distribution — where all probabilities sum to one — for each token
 decoder_dense = Dense(num_decoder_tokens, activation='softmax')
-
 # Filter outputs through the Dense layer --> transforms our LSTM output from a dimensionality to the number of unique words within the hidden layer’s vocabulary 
 decoder_outputs = decoder_dense(decoder_outputs)
 
