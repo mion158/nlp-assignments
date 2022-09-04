@@ -1,4 +1,4 @@
-Set up training using a small text first
+Practice setting up training using a small text first
 
 - For each sentence, Keras expects a NumPy matrix containing one-hot vectors for each token.
 - Keras will fit — or train — the seq2seq model using these matrices of one-hot vectors:
