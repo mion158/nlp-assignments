@@ -8,41 +8,54 @@ from keras.models import Model, load_model
 import numpy as np
 
 training_model = load_model('training_model.h5')
+#Because using a saved model:
 encoder_inputs = training_model.input[0]
 encoder_outputs, state_h_enc, state_c_enc = training_model.layers[2].output
 encoder_states = [state_h_enc, state_c_enc]
-encoder_model = Model(encoder_inputs, encoder_states)
 
+# Building the encoder test model
+encoder_model = Model(encoder_inputs, encoder_states)
 latent_dim = 256
+
+# Building the two decoder state input layers:
 decoder_state_input_hidden = Input(shape=(latent_dim,))
 decoder_state_input_cell = Input(shape=(latent_dim,))
+
+# Put the state input layers into a list:
 decoder_states_inputs = [decoder_state_input_hidden, decoder_state_input_cell]
+
+# Call the decoder LSTM:
 decoder_outputs, state_hidden, state_cell = decoder_lstm(decoder_inputs, initial_state=decoder_states_inputs)
 decoder_states = [state_hidden, state_cell]
+# Redefine the decoder outputs:
 decoder_outputs = decoder_dense(decoder_outputs)
+# Build the decoder test model:
 decoder_model = Model([decoder_inputs] + decoder_states_inputs, [decoder_outputs] + decoder_states)
 
 def decode_sequence(test_input):
+  # Encode the input as state vectors:
   encoder_states_value = encoder_model.predict(test_input)
+  # Set decoder states equal to encoder final states
   decoder_states_value = encoder_states_value
+  # Generate empty target sequence of length 1:
   target_seq = np.zeros((1, 1, num_decoder_tokens))
+  # Populate the first token of target sequence with the start token:
   target_seq[0, 0, target_features_dict['<START>']] = 1.
+  
   decoded_sentence = ''
+
   
   stop_condition = False
   while not stop_condition:
-    # Run the decoder model to get possible 
-    # output tokens (with probabilities) & states
-    output_tokens, new_decoder_hidden_state, new_decoder_cell_state = decoder_model.predict(
-      [target_seq] + decoder_states_value)
+    # Run the decoder model to get possible output tokens (with probabilities) & states
+    output_tokens, new_decoder_hidden_state, new_decoder_cell_state = decoder_model.predict([target_seq] + decoder_states_value)
 
     # Choose token with highest probability
     sampled_token_index = np.argmax(output_tokens[0, -1, :])
     sampled_token = reverse_target_features_dict[sampled_token_index]
     decoded_sentence += " " + sampled_token
 
-    # Exit condition: either hit max length
-    # or find stop token.
+    # Exit condition: either hit max length or find stop token.
     if (sampled_token == '<END>' or len(decoded_sentence) > max_decoder_seq_length):
       stop_condition = True
 
