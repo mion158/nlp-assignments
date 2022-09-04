@@ -1,4 +1,4 @@
-Practice setting up training using a small text first
+Practice setting up training model using a small text first
 
 - For each sentence, Keras expects a NumPy matrix containing one-hot vectors for each token.
 - Keras will fit — or train — the seq2seq model using these matrices of one-hot vectors:
@@ -18,3 +18,12 @@ Decoder training set up:
 - Run the output through a final activation layer, using the Softmax function --> give us the probability distribution — where all probabilities sum to one — for each token
 - The final layer also transforms our LSTM output from a dimensionality of whatever we gave it to the number of unique words within the hidden layer’s vocabulary (the number of unique target tokens)
 (Dense layer type is the least complex for activation layer)
+
+Train the seq2seq model:
+- Keras models demand two arguments to compile:
+  + An optimizer (use RMSprop here, a fancy version of gradient descent) to minimize our error rate (error at guessing the true next word given the previous words in a sentence)
+  + A loss function (use logarithm-based cross-entropy function here) to determine the error rate
+- Fit the model - adjust:
+  + batch size (smaller batch sizes mean more time)
+  + the number of epochs or cycles of training (more epochs mean a model that is more trained on the dataset -->  process will take more time)
+  + validation split 
