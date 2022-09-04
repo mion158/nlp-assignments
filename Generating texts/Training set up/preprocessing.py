@@ -20,13 +20,11 @@ for line in lines:
   input_docs.append(input_doc)
   # Splitting words from punctuation
   target_doc = " ".join(re.findall(r"[\w']+|[^\s\w]", target_doc))
-  # Redefine target_doc below 
-  # and append it to target_docs:
+  # Redefine target_doc below and append it to target_docs:
   target_doc = '<START> ' + target_doc + ' <END>'
   target_docs.append(target_doc)
   
-  # Now we split up each sentence into words
-  # and add each unique word to our vocabulary set
+  # Now we split up each sentence into words and add each unique word to our vocabulary set
   for token in re.findall(r"[\w']+|[^\s\w]", input_doc):
     print(token)
     # Add your code here:
