@@ -70,3 +70,19 @@ decoder_dense = Dense(num_decoder_tokens, activation='softmax')
 # Filter outputs through the Dense layer --> transforms our LSTM output from a dimensionality to the number of unique words within the hidden layer’s vocabulary 
 decoder_outputs = decoder_dense(decoder_outputs)
 
+
+
+# Building the training model:
+training_model = Model([encoder_inputs, decoder_inputs], decoder_outputs)
+training_model.summary()
+
+# Compile the model:
+training_model.compile(optimizer='rmsprop', loss='categorical_crossentropy', metrics=['accuracy'])
+
+# Choose the batch size
+# and number of epochs:
+batch_size = 50
+epochs = 50
+
+# Train the model:
+training_model.fit([encoder_input_data, decoder_input_data], decoder_target_data, batch_size=batch_size, epochs=epochs, validation_split=0.2)
