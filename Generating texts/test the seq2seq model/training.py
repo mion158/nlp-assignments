@@ -1,7 +1,6 @@
 from prep import num_encoder_tokens, num_decoder_tokens, decoder_target_data, encoder_input_data, decoder_input_data, decoder_target_data
 
 from tensorflow import keras
-# Add Dense to the imported layers
 from keras.layers import Input, LSTM, Dense
 from keras.models import Model
 
@@ -27,4 +26,5 @@ training_model.summary()
 training_model.compile(optimizer='rmsprop', loss='categorical_crossentropy', metrics=['accuracy'])
 # Train the model:
 training_model.fit([encoder_input_data, decoder_input_data], decoder_target_data, batch_size=batch_size, epochs=epochs, validation_split=0.2)
+# Save the model
 training_model.save('training_model.h5')
