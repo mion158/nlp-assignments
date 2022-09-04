@@ -45,7 +45,7 @@ def compute_similarity(tokens, category):
 
 class ChatBot:
   
-  #define .make_exit() below:
+  #exit method:
   def make_exit(self, user_message):
     for exit_command in exit_commands:
       if exit_command in user_message:
@@ -53,12 +53,14 @@ class ChatBot:
         return True
     
     return False 
-  #define .chat() below:
+
+  #chat method
   def chat(self):
     user_message = input("How can I help?\n")
     while not self.make_exit(user_message):
       user_message = self.respond(user_message)
-  #define .find_intent_match() below:
+    
+  #method to match intent below:
   def find_intent_match(self, responses, user_message):
     bow_user_message = Counter(preprocess(user_message))
     processed_responses = [Counter(preprocess(response)) for response in responses]
@@ -68,7 +70,7 @@ class ChatBot:
     return responses[response_index]
 
 
-  #define .find_entities() below:
+  #method to find entities
   def find_entities(self, user_message):
     tagged_user_message = pos_tag(preprocess(user_message))
     message_nouns = extract_nouns(tagged_user_message)
@@ -85,7 +87,7 @@ class ChatBot:
 
 
 
-  #define .respond() below:
+  #method to respond to intent
   def respond(self, user_message):
     best_response = self.find_intent_match(responses,user_message)
     entity = self.find_entities(user_message)
