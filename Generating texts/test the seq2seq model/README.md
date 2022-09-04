@@ -1,4 +1,6 @@
 This time don't know the target sequence
+
+
 To set up for testing the model:
  - build an encoder model with our encoder inputs and the placeholders for the encoder’s output states
  - build placeholders for the decoder’s input states, which we can build as input layers and store together (because don’t know what we want to decode yet or what hidden state we’re going to end up with, so we need to do everything step-by-step)
