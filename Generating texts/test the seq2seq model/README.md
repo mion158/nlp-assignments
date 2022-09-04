@@ -14,3 +14,13 @@ To set up for testing the model:
    + the decoder output states (the memory throughout the network from one word to the next) 
  
  
+Test the model by building a function that:
+- accepts a NumPy matrix representing the test English sentence input
+- uses the encoder and decoder we’ve created to generate Spanish output
+Translation:
+- decode the sentence word by word using the output state that we retrieved from the encoder (which becomes our decoder’s initial hidden state) --> use while loop run until either current token is "<END>" or decoded sentence hit maximum target length
+ + beginning with the "<START>" token and the current state (initially passed to us from the encoder model) to get a bunch of possible next words and their corresponding probabilities
+ + use NumPy’s .argmax() method to determine the token (word) with the highest probability and add it to the decoded sentence
+- update the decoder hidden state after each word so that we use previously decoded words to help decode new ones
+
+
