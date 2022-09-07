@@ -1,8 +1,7 @@
-Has two types:
 
-Type 1: build and train the model with target sentence sequence --> teacher forcing method to train seq2seq decoders
+build and train the model with target sentence sequence --> teacher forcing method to train seq2seq decoders
 
-Type 2: test the model without target sentence sequence --> need to decode step by step
+test the model without target sentence sequence --> need to decode step by step
 
 - seq2seq models are deep learning models that use recurrent neural networks like LSTMs to generate output.
 - Seq2seq networks encompass two main parts:
