@@ -12,6 +12,6 @@ the english language and chatbot - excercises from Codecademy
 9. Generative chatbot, from generating texts
 
 ------------------------------
-Two notebooks not in a dir - practicing generating texts:
+Two notebooks outside - practicing generating texts:
 - Cat-Chatbot: a chatbot to talk about cats trained from twitter dialogue
 - Viet-Eng: translation trained from a small viet-eng text
