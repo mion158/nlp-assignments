@@ -1,4 +1,4 @@
-# NLP Language Chatbot in Python
+# NLP in Python
 the english language and chatbot - excercises from Codecademy 
 
 1. Simple chatbot, predetermined dialogue tree
