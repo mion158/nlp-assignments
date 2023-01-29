@@ -1,5 +1,4 @@
-# NLP in Python
-the english language and chatbot - excercises from Codecademy 
+excercises from Codecademy 
 
 1. Simple chatbot, predetermined dialogue tree
 2. Language parsing, part-of-speech tag
